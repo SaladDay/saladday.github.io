@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>sun-awt-X11GraphicsEnvironment | SaladDay的Blog</title><meta name="author" content="SaladDay"><meta name="copyright" content="SaladDay"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="事情起因：项目中有一段代码是调用awt包下的createGE()方法生成图片的，在windows环境下调用正常，但是linux环境下运行的项目调用却报错，前端请求的时候控制台一直提示请求路径404,所以刚开始给我找问题很大的误导，之后我在去查看tomcat下的日志的时候，从下面的报错信息找出了问题所在。  报错信息： 123456789101112131415161718192021222324">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sun-awt-X11GraphicsEnvironment">
+<meta property="og:url" content="http://www.saladday.top/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/index.html">
+<meta property="og:site_name" content="SaladDay的Blog">
+<meta property="og:description" content="事情起因：项目中有一段代码是调用awt包下的createGE()方法生成图片的，在windows环境下调用正常，但是linux环境下运行的项目调用却报错，前端请求的时候控制台一直提示请求路径404,所以刚开始给我找问题很大的误导，之后我在去查看tomcat下的日志的时候，从下面的报错信息找出了问题所在。  报错信息： 123456789101112131415161718192021222324">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg">
+<meta property="article:published_time" content="2022-12-28T04:37:33.000Z">
+<meta property="article:modified_time" content="2022-12-28T09:00:11.253Z">
+<meta property="article:author" content="SaladDay">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.saladday.top/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'sun-awt-X11GraphicsEnvironment',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-12-28 17:00:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><style>#article-container.post-content h1:before, h2:before, h3:before, h4:before, h5:before, h6:before { -webkit-animation: avatar_turn_around 1s linear infinite; -moz-animation: avatar_turn_around 1s linear infinite; -o-animation: avatar_turn_around 1s linear infinite; -ms-animation: avatar_turn_around 1s linear infinite; animation: avatar_turn_around 1s linear infinite; }</style><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body><link rel="stylesheet" href="/css/corner-indicator.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://saladday-figure-bed.oss-cn-chengdu.aliyuncs.com/img/mmexport1667394117445.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives"><span> 所有文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">SaladDay的Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives"><span> 所有文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">sun-awt-X11GraphicsEnvironment</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-28T04:37:33.000Z" title="发表于 2022-12-28 12:37:33">2022-12-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-28T09:00:11.253Z" title="更新于 2022-12-28 17:00:11">2022-12-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Debug/">Debug</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="sun-awt-X11GraphicsEnvironment"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><ol>
+<li><p>事情起因：<br>项目中有一段代码是调用awt包下的createGE()方法生成图片的，在windows环境下调用正常，但是linux环境下运行的项目调用却报错，前端请求的时候控制台一直提示请求路径404,所以刚开始给我找问题很大的误导，之后我在去查看tomcat下的日志的时候，从下面的报错信息找出了问题所在。</p>
+</li>
+<li><p>报错信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">&quot;http-bio-8080-exec-5&quot;</span> java.lang.InternalError: Can<span class="string">&#x27;t connect to X11 window server using &#x27;</span>localhost:10.0<span class="string">&#x27; as the value of the DISPLAY variable.</span></span><br><span class="line"><span class="string">	at sun.awt.X11GraphicsEnvironment.initDisplay(Native Method)</span></span><br><span class="line"><span class="string">	at sun.awt.X11GraphicsEnvironment.access$200(X11GraphicsEnvironment.java:65)</span></span><br><span class="line"><span class="string">	at sun.awt.X11GraphicsEnvironment$1.run(X11GraphicsEnvironment.java:110)</span></span><br><span class="line"><span class="string">	at java.security.AccessController.doPrivileged(Native Method)</span></span><br><span class="line"><span class="string">	at sun.awt.X11GraphicsEnvironment.&lt;clinit&gt;(X11GraphicsEnvironment.java:74)</span></span><br><span class="line"><span class="string">	at java.lang.Class.forName0(Native Method)</span></span><br><span class="line"><span class="string">	at java.lang.Class.forName(Class.java:191)</span></span><br><span class="line"><span class="string">	at java.awt.GraphicsEnvironment.createGE(GraphicsEnvironment.java:102)</span></span><br><span class="line"><span class="string">	at java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment(GraphicsEnvironment.java:81)</span></span><br><span class="line"><span class="string">	at java.awt.image.BufferedImage.createGraphics(BufferedImage.java:1182)</span></span><br><span class="line"><span class="string">	at java.awt.image.BufferedImage.getGraphics(BufferedImage.java:1172)</span></span><br><span class="line"><span class="string">	at cn.saladday.travel.util.CaptchaUtils.createImage(CaptchaUtils.java:149)</span></span><br><span class="line"><span class="string">	at cn.saladday.travel.util.CaptchaUtils.createImage(CaptchaUtils.java:137)</span></span><br><span class="line"><span class="string">	at cn.saladday.travel.web.servlet.CheckCodeServlet.doGet(CheckCodeServlet.java:34)</span></span><br><span class="line"><span class="string">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:620)</span></span><br><span class="line"><span class="string">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span></span><br><span class="line"><span class="string">	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span></span><br><span class="line"><span class="string">	at cn.saladday.travel.web.filter.CharacterFilter.doFilter(CharacterFilter.java:28)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:220)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:122)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:503)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:170)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:103)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:950)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:116)</span></span><br><span class="line"><span class="string">	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:421)</span></span><br><span class="line"><span class="string">	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1070)</span></span><br><span class="line"><span class="string">	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:611)</span></span><br><span class="line"><span class="string">	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:316)</span></span><br><span class="line"><span class="string">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)</span></span><br><span class="line"><span class="string">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)</span></span><br><span class="line"><span class="string">	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)</span></span><br><span class="line"><span class="string">	at java.lang.Thread.run(Thread.java:745)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事情缘故：</p>
+</li>
+</ol>
+<p>图片采用awt图形处理并内存中生成，java程序会去寻找linux上的图形界面是否启动 ，如linux缺少组件则, 缺少了显示设备、键盘或鼠标会报这个错误;<br>所以需要开启无头模式, Headless模式是系统的一种配置模式 , 开始激活headless模式，告诉程序，现在你要工作在Headless mode下，就不要指望硬件帮忙了，你得自力更生，依靠系统的计算能力模拟出这些特性来继续。</p>
+<ol start="4">
+<li><p>解决办法：</p>
+<p>在tomcat&#x2F;bin&#x2F;catalina.sh里加入下面这段代码，就可以正常运行了 ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JAVA_OPTS=<span class="string">&quot;<span class="variable">$JAVA_OPTS</span> -Djava.awt.headless=true&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.saladday.top">SaladDay</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.saladday.top/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/">http://www.saladday.top/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.saladday.top" target="_blank">SaladDay的Blog</a>！</span></div></div><div class="tag_share"><div class="post_share"><div class="social-share" data-image="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/12/21/SQL_redis/"><img class="next-cover" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">redis</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://saladday-figure-bed.oss-cn-chengdu.aliyuncs.com/img/mmexport1667394117445.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SaladDay</div><div class="author-info__description">其实不会敲代码</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SaladDay"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:1203511142@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="sun-awt-X11GraphicsEnvironment"/></a><div class="content"><a class="title" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment">sun-awt-X11GraphicsEnvironment</a><time datetime="2022-12-28T04:37:33.000Z" title="发表于 2022-12-28 12:37:33">2022-12-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/21/SQL_redis/" title="redis"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="redis"/></a><div class="content"><a class="title" href="/2022/12/21/SQL_redis/" title="redis">redis</a><time datetime="2022-12-21T06:54:45.000Z" title="发表于 2022-12-21 14:54:45">2022-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/21/JSON_JSON%E8%A7%A3%E6%9E%90%E5%99%A8/" title="JSON解析器"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JSON解析器"/></a><div class="content"><a class="title" href="/2022/12/21/JSON_JSON%E8%A7%A3%E6%9E%90%E5%99%A8/" title="JSON解析器">JSON解析器</a><time datetime="2022-12-21T05:15:51.000Z" title="发表于 2022-12-21 13:15:51">2022-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/20/JS%E6%A1%86%E6%9E%B6_JQuery/" title="JQuery"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JQuery"/></a><div class="content"><a class="title" href="/2022/12/20/JS%E6%A1%86%E6%9E%B6_JQuery/" title="JQuery">JQuery</a><time datetime="2022-12-20T04:33:18.000Z" title="发表于 2022-12-20 12:33:18">2022-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/19/Java_Java%E5%A2%9E%E5%BC%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95/" title="Java增强对象的方法"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java增强对象的方法"/></a><div class="content"><a class="title" href="/2022/12/19/Java_Java%E5%A2%9E%E5%BC%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95/" title="Java增强对象的方法">Java增强对象的方法</a><time datetime="2022-12-19T08:27:30.000Z" title="发表于 2022-12-19 16:27:30">2022-12-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By SaladDay</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

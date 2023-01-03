@@ -48,7 +48,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-01-03 21:21:23'
+  postUpdate: '2023-01-03 21:23:59'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -189,39 +189,7 @@
 
 经典的有限状态机三段式设计
 
-Moore型123456789101112131415161718192021222324252627282930always@(poesedge clk or rst_n) begin    if(clr) state&lt;=S0;    else state&lt;=next_state;//当时钟来的时候，将next_state(通过一系列的组合逻辑从激励和输入中得到的次态)赋给stateendalways@(state or x) begin //当前的输入和 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/11/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_%E5%BE%AE%E4%BF%A1%E7%9A%84OpenID%E5%92%8CUnionID/" title="微信的OpenID和ＵｎｉｏｎＩＤ"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信的OpenID和ＵｎｉｏｎＩＤ"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_%E5%BE%AE%E4%BF%A1%E7%9A%84OpenID%E5%92%8CUnionID/" title="微信的OpenID和ＵｎｉｏｎＩＤ">微信的OpenID和ＵｎｉｏｎＩＤ</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-05T08:59:52.000Z" title="发表于 2022-11-05 16:59:52">2022-11-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></span></div><div class="content">OpenID和unionidOpenID：为了识别用户，每个用户针对每个公众号或小程序等应用会产生一个安全的OpenID，公众号或应用可将此ID进行存储，便于用户下次登录时辨识其身份，或将其与用户在第三方应用中的原有账号进行绑定UnionId:UnionId也是用户的标识符，但它与OpenID不同的是，同一个微信用户，登录同一个开发主体下的多个小程序或公众号的时候，分配的UnionId是一样的。
-
-可以打个通俗的比喻，比如某个用户是万达商场的会员，那么UnionId就是这个用户对应的万达会员标识，而这个用户又比较爱买买买，在万达商场的很多商店下面都是会员，那么此时每个商店赋予这个用户的会员号就相当于OpenID了，总而言之，在同一个开发体下，UnionId是唯一的，而OpenID不一定唯一。
-
-微信授权登录整个过程可以总结成以下步骤:
-
-引导进入授权页用户授权需要进入以下页面（页面链接参数解释如上表所示）：https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&amp;redirect_uri=REDIRECT_U ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/11/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_%E5%BE%AE%E4%BF%A1%E4%BA%91%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" title="微信云开发实战"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信云开发实战"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_%E5%BE%AE%E4%BF%A1%E4%BA%91%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" title="微信云开发实战">微信云开发实战</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-03T07:07:03.000Z" title="发表于 2022-11-03 15:07:03">2022-11-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></span></div><div class="content">云开发与传统的区别传统互联网软件的运作模式
-
-后端服务器运行操作系统，接收到网络请求之后，利用运行在服务端的语言（node.js）去操作用户的逻辑，负责从数据库或者磁盘中拉去数据，再返回到前端
-
-云开发
-无需开发者搭建和运维服务器
-可以轻松识别用户身份
-拥有四大能力
-云函数 ：可以直接获取当前微信用户的身份
-云数据库： 一个云端的易操控的数据库
-云储存： 可以直接在小程序前端上传&#x2F;下载文件
-云调用： 可以直接使用小程序开放接口
-
-
-
-
-因此我们在后端只需要专注与实现用户逻辑的实现即可
-小程序在云开发下的运作模式
-小芝士1.Js变量的定义四种定义方式
-12345var x= 10 //局部定义，函数内定义，函数外不可以访问。// 注意var，let如果在函数（块）外定义，相当于属于整个大的，那么在函数内是可以访问的x = 10 //全局定义，函数内定义，函数外也可以访问let x = 10 //块内定义，块外不可以访问const x=10 //不可以修改了
-
-
-
-2. 同步和异步
-同步： 下一行代码必须等待上一行代码执行完成，才能执行
-
-关心代码执行结果的，顺序执行，保证结果的 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/11/01/Arduino_%E6%99%BA%E8%83%BD%E5%9E%83%E5%9C%BE%E6%A1%B6/" title="智能垃圾桶"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="智能垃圾桶"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/01/Arduino_%E6%99%BA%E8%83%BD%E5%9E%83%E5%9C%BE%E6%A1%B6/" title="智能垃圾桶">智能垃圾桶</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-01T15:10:45.000Z" title="发表于 2022-11-01 23:10:45">2022-11-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Arduino/">Arduino</a></span></div><div class="content">基于Arduino的智能垃圾桶使用LD3320语言识别开发板模块，SYN6288语言合成开发板模块，Arduino uno r3开发板，手扫传感器（目前还没选好具体型号），SG90舵机，实现功能：
+Moore型123456789101112131415161718192021222324252627282930always@(poesedge clk or rst_n) begin    if(clr) state&lt;=S0;    else state&lt;=next_state;//当时钟来的时候，将next_state(通过一系列的组合逻辑从激励和输入中得到的次态)赋给stateendalways@(state or x) begin //当前的输入和 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/11/01/Arduino_%E6%99%BA%E8%83%BD%E5%9E%83%E5%9C%BE%E6%A1%B6/" title="智能垃圾桶"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="智能垃圾桶"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/01/Arduino_%E6%99%BA%E8%83%BD%E5%9E%83%E5%9C%BE%E6%A1%B6/" title="智能垃圾桶">智能垃圾桶</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-01T15:10:45.000Z" title="发表于 2022-11-01 23:10:45">2022-11-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Arduino/">Arduino</a></span></div><div class="content">基于Arduino的智能垃圾桶使用LD3320语言识别开发板模块，SYN6288语言合成开发板模块，Arduino uno r3开发板，手扫传感器（目前还没选好具体型号），SG90舵机，实现功能：
 
 手扫自动打开、关闭垃圾桶
 语言识别垃圾种类自动打开相应垃圾桶，延时关闭
@@ -250,7 +218,7 @@ Moore型123456789101112131415161718192021222324252627282930always@(poesedge clk 
 ·可实现自动定时紫外线灯进行消毒。（新加入）
 ·语言识别具体垃圾类型，并合成语言回复，同时打开相应垃圾桶
 ·可实现检测人员手势，对垃圾桶盖进行开关。
-·可实现当垃圾桶装满时LED灯提示显示：垃圾桶已满。清理完成后，正常 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/06/05/Java-reflect/" title="Java_reflect"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java_reflect"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/06/05/Java-reflect/" title="Java_reflect">Java_reflect</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-06-05T08:33:45.000Z" title="发表于 2022-06-05 16:33:45">2022-06-05</time></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/01/29/%E6%9D%82%E8%B0%88_%E6%B5%85%E6%9E%90SSH%E6%8A%80%E6%9C%AF%E4%BB%A5%E5%8F%8A%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E7%9A%84%E5%8E%9F%E7%90%86/" title="浅析SSH技术以及免密登录的原理"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="浅析SSH技术以及免密登录的原理"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/01/29/%E6%9D%82%E8%B0%88_%E6%B5%85%E6%9E%90SSH%E6%8A%80%E6%9C%AF%E4%BB%A5%E5%8F%8A%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E7%9A%84%E5%8E%9F%E7%90%86/" title="浅析SSH技术以及免密登录的原理">浅析SSH技术以及免密登录的原理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-01-29T08:03:41.000Z" title="发表于 2022-01-29 16:03:41">2022-01-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span></div><div class="content">介绍SSH以往的网络通信采用明文传输的方式(Telent)，这种方式一般在公司内网（绝对安全的网络）比较常见。
+·可实现当垃圾桶装满时LED灯提示显示：垃圾桶已满。清理完成后，正常 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/01/29/%E6%9D%82%E8%B0%88_%E6%B5%85%E6%9E%90SSH%E6%8A%80%E6%9C%AF%E4%BB%A5%E5%8F%8A%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E7%9A%84%E5%8E%9F%E7%90%86/" title="浅析SSH技术以及免密登录的原理"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="浅析SSH技术以及免密登录的原理"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/01/29/%E6%9D%82%E8%B0%88_%E6%B5%85%E6%9E%90SSH%E6%8A%80%E6%9C%AF%E4%BB%A5%E5%8F%8A%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E7%9A%84%E5%8E%9F%E7%90%86/" title="浅析SSH技术以及免密登录的原理">浅析SSH技术以及免密登录的原理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-01-29T08:03:41.000Z" title="发表于 2022-01-29 16:03:41">2022-01-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span></div><div class="content">介绍SSH以往的网络通信采用明文传输的方式(Telent)，这种方式一般在公司内网（绝对安全的网络）比较常见。
 现在主要的加密算法有两种：对称加密和非对称加密。
 
 对称加密使用同一个密钥来进行加密和解密，这样在传输时是安全可靠的。但是如果集群过大，（每一个集群会有一个密钥，那么一个用户会有非常多个密钥）会导致算法复杂以及若一个客户端的的密钥被窃取，则整个系统的安全性便不复存在。
@@ -264,7 +232,88 @@ Moore型123456789101112131415161718192021222324252627282930always@(poesedge clk 
 客户端将公钥加密字符串发送给服务端
 服务端使用私钥，解密公钥加密字符串，得到原始密码
 校验密码是否合法（此为本机work密码）
-返回登录结果给客户端：成功登录或密 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://saladday-figure-bed.oss-cn-chengdu.aliyuncs.com/img/mmexport1667394117445.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SaladDay</div><div class="author-info__description">其实不会敲代码</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SaladDay"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:1203511142@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="sun-awt-X11GraphicsEnvironment"/></a><div class="content"><a class="title" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment">sun-awt-X11GraphicsEnvironment</a><time datetime="2022-12-28T04:37:33.000Z" title="发表于 2022-12-28 12:37:33">2022-12-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/14/Verilog_%E5%9F%BA%E4%BA%8EFSM%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96%E6%A8%A1%E5%9D%97/" title="基于FSM按键消抖模块"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于FSM按键消抖模块"/></a><div class="content"><a class="title" href="/2022/11/14/Verilog_%E5%9F%BA%E4%BA%8EFSM%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96%E6%A8%A1%E5%9D%97/" title="基于FSM按键消抖模块">基于FSM按键消抖模块</a><time datetime="2022-11-14T11:46:07.000Z" title="发表于 2022-11-14 19:46:07">2022-11-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/11/Verilog_ILA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="ILA的使用教程"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ILA的使用教程"/></a><div class="content"><a class="title" href="/2022/11/11/Verilog_ILA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="ILA的使用教程">ILA的使用教程</a><time datetime="2022-11-11T02:36:29.000Z" title="发表于 2022-11-11 10:36:29">2022-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/09/Verilog_%E5%88%A9%E7%94%A8%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%94%AE%E5%8D%96%E6%9C%BA/" title="利用有限状态机实现自动售卖机"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用有限状态机实现自动售卖机"/></a><div class="content"><a class="title" href="/2022/11/09/Verilog_%E5%88%A9%E7%94%A8%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%94%AE%E5%8D%96%E6%9C%BA/" title="利用有限状态机实现自动售卖机">利用有限状态机实现自动售卖机</a><time datetime="2022-11-09T03:27:48.000Z" title="发表于 2022-11-09 11:27:48">2022-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/07/Verilog_101%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84Verilog%E6%8F%8F%E8%BF%B0/" title="101序列检测器的Verilog描述（Moore&amp;Mealy）"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="101序列检测器的Verilog描述（Moore&amp;Mealy）"/></a><div class="content"><a class="title" href="/2022/11/07/Verilog_101%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84Verilog%E6%8F%8F%E8%BF%B0/" title="101序列检测器的Verilog描述（Moore&amp;Mealy）">101序列检测器的Verilog描述（Moore&amp;Mealy）</a><time datetime="2022-11-07T00:52:41.000Z" title="发表于 2022-11-07 08:52:41">2022-11-07</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+返回登录结果给客户端：成功登录或密 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/12/08/%E6%9D%82%E8%B0%88_%E5%AD%97%E7%AC%A6%E9%9B%86/" title="字符集"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="字符集"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/12/08/%E6%9D%82%E8%B0%88_%E5%AD%97%E7%AC%A6%E9%9B%86/" title="字符集">字符集</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-12-08T03:20:21.000Z" title="发表于 2021-12-08 11:20:21">2021-12-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span></div><div class="content">ASCII
+0-127，一个128个编码，因此一个字节即可 。
+
+编码规则，前面补0，补齐8位。
+
+
+GBK（GB2313和BIG5的扩展）
+英文
+兼容ascii，编码相同，使用一个字节。
+首位一定是0
+
+
+中文
+高位字节首位一定是1
+
+
+
+Unicode（万国码）
+英语
+
+对应数字和ascii一致，编码时有不同的规则
+
+UTF-32：固定采用4个字节编码
+UTF-16：采用2-4个字节编码
+UTF-8：采用1-4个字节编码
+
+
+UTF-8是目前最常用的一种编码方式，其中UTF是Unicode transfer format的缩写。
+
+ASCII：1个字节
+
+中文：3个字节
+
+编码方式：
+
+
+
+UTF-8 针对不同字节编码方式
+
+
+
+0xxxxxxx
+
+
+110xxxxx 10xxxxxx
+
+
+1110xxxx 10xxxxxx 10xxxxxx
+
+
+11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+
+
+
+在Java使用的时候，会使用到FlieReader对象，若采用UTF-8形式编码，则在遇到中文时会自动读取三个字节，并且自动解码返回其在Unicode字符集中对 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/12/01/%E6%9D%82%E8%B0%88_%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="正则表达式"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="正则表达式"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/12/01/%E6%9D%82%E8%B0%88_%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="正则表达式">正则表达式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-12-01T13:40:12.000Z" title="发表于 2021-12-01 21:40:12">2021-12-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span></div><div class="content">
+Author:saladday
+本人学习笔记用
+
+一般在代码中简写为regex。
+主要作用有两个：1. 校验字符串是否符合规则 2. 在一段文本中查找满足要求的内容
+字符类12345678910111213141516[abc]			//只能是abc[^abc]			//除了abc以外的任何字符[a-zA-Z]		//a到z A到Z 包括[a-d[m-p]]		//a到d或者m-p[a-z&amp;&amp;[def]]	//a-z和def的交集[a-z&amp;&amp;[^bc]]	//a-z和非bc的交集/*预定义字符*/.				//任何字符\d				//数字:[0-9]\D				//非数字:[^0-9]\s				//一个空白字符[\t\n\x\f\r\x0b]\S				//同理\w				//[a-zA-Z0-9_]英文字母,数字,下划线\W				//同理
+
+数量词1234567X?				//X,一次或0次X*				//X，零次或多次X+				//X,一次或多次X&#123;n&#125;			//X,正好N次X&#123;n,&#125;			//X,大于 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/11/29/GIT_GIT%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" title="GIT基本命令"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GIT基本命令"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/11/29/GIT_GIT%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" title="GIT基本命令">GIT基本命令</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-11-29T05:36:37.000Z" title="发表于 2021-11-29 13:36:37">2021-11-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/GIT/">GIT</a></span></div><div class="content">理论基础git工作流程图：
+
+Git的数据库分为远程数据库和本地数据库的两种。
+远程数据库: 配有专用的服务器，为了多人共享而建立的数据库。
+本地数据库: 为了方便用户个人使用，在自己的机器上配置的数据库。
+
+数据库分为远程和本地两种。平时用手头上的机器在本地数据库上操作就可以了。如果想要公开在本地数据库中修改的内容，把内容上传到远程数据库就可以了。另外，通过远程数据库还可以取得其他人修改的内容。
+
+工作树和索引在git的管理下，用户的工作区一般被叫做工作树；
+在数据库和工作树之间有索引，索引是向数据库提交作准备的区域；如图：
+
+Git在执行提交的时候，并不是直接将工作树的直接保存到数据库，而是将设置在中间索引区域的文件保存到数据库。
+因此，需要提交文件，首先需要将文件加入到索引区中。
+修改记录的提交若要把文件或目录的添加和变更保存到数据库，就需要进行提交。
+执行提交后，数据库中会生成上次提交的状态与当前状态的差异记录（也被称为revision）。
+注意：
+
+不同类别的修改 (如：Bug修复和功能添加) 要尽量分开提交，以方便以后从历史记录里查找特定的修改内容；
+
+注意写提交信息，这是 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://saladday-figure-bed.oss-cn-chengdu.aliyuncs.com/img/mmexport1667394117445.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SaladDay</div><div class="author-info__description">其实不会敲代码</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SaladDay"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:1203511142@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="sun-awt-X11GraphicsEnvironment"/></a><div class="content"><a class="title" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment">sun-awt-X11GraphicsEnvironment</a><time datetime="2022-12-28T04:37:33.000Z" title="发表于 2022-12-28 12:37:33">2022-12-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/14/Verilog_%E5%9F%BA%E4%BA%8EFSM%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96%E6%A8%A1%E5%9D%97/" title="基于FSM按键消抖模块"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于FSM按键消抖模块"/></a><div class="content"><a class="title" href="/2022/11/14/Verilog_%E5%9F%BA%E4%BA%8EFSM%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96%E6%A8%A1%E5%9D%97/" title="基于FSM按键消抖模块">基于FSM按键消抖模块</a><time datetime="2022-11-14T11:46:07.000Z" title="发表于 2022-11-14 19:46:07">2022-11-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/11/Verilog_ILA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="ILA的使用教程"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ILA的使用教程"/></a><div class="content"><a class="title" href="/2022/11/11/Verilog_ILA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="ILA的使用教程">ILA的使用教程</a><time datetime="2022-11-11T02:36:29.000Z" title="发表于 2022-11-11 10:36:29">2022-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/09/Verilog_%E5%88%A9%E7%94%A8%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%94%AE%E5%8D%96%E6%9C%BA/" title="利用有限状态机实现自动售卖机"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用有限状态机实现自动售卖机"/></a><div class="content"><a class="title" href="/2022/11/09/Verilog_%E5%88%A9%E7%94%A8%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%94%AE%E5%8D%96%E6%9C%BA/" title="利用有限状态机实现自动售卖机">利用有限状态机实现自动售卖机</a><time datetime="2022-11-09T03:27:48.000Z" title="发表于 2022-11-09 11:27:48">2022-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/07/Verilog_101%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84Verilog%E6%8F%8F%E8%BF%B0/" title="101序列检测器的Verilog描述（Moore&amp;Mealy）"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="101序列检测器的Verilog描述（Moore&amp;Mealy）"/></a><div class="content"><a class="title" href="/2022/11/07/Verilog_101%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84Verilog%E6%8F%8F%E8%BF%B0/" title="101序列检测器的Verilog描述（Moore&amp;Mealy）">101序列检测器的Verilog描述（Moore&amp;Mealy）</a><time datetime="2022-11-07T00:52:41.000Z" title="发表于 2022-11-07 08:52:41">2022-11-07</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             <a class="card-more-btn" href="/categories/" title="查看更多">
@@ -272,7 +321,7 @@ Moore型123456789101112131415161718192021222324252627282930always@(poesedge clk 
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Arduino/"><span class="card-category-list-name">Arduino</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Debug/"><span class="card-category-list-name">Debug</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GIT/"><span class="card-category-list-name">GIT</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HTTP/"><span class="card-category-list-name">HTTP</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JS/"><span class="card-category-list-name">JS</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JSON/"><span class="card-category-list-name">JSON</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JavaWeb/"><span class="card-category-list-name">JavaWeb</span><span class="card-category-list-count">3</span></a></li>
-            </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">34</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-01-03T13:21:22.780Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By SaladDay</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>function subtitleType () {
+            </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">34</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-01-03T13:23:59.080Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By SaladDay</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>function subtitleType () {
   if (true) { 
     window.typed = new Typed("#subtitle", {
       strings: ["记录菜狗的成长。"],

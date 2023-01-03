@@ -48,7 +48,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2022-12-28 17:49:00'
+  postUpdate: '2023-01-03 21:21:23'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -141,260 +141,130 @@
 事情起因：项目中有一段代码是调用awt包下的createGE()方法生成图片的，在windows环境下调用正常，但是linux环境下运行的项目调用却报错，前端请求的时候控制台一直提示请求路径404,所以刚开始给我找问题很大的误导，之后我在去查看tomcat下的日志的时候，从下面的报错信息找出了问题所在。
 
 报错信息：
-123456789101112131415161718192021222324252627282930313233343536373839404142Exception in thread &quot;http-bio-8080-exec-5&quot; java.lang.InternalError: Can&#x27;t connect to X11 window server using &#x27;localhost:10.0&#x27; as the value of the DISPLAY variable.	at sun.awt.X11GraphicsEnvironment.initDisplay(Native Method)	at sun.awt.X11 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/12/21/SQL_redis/" title="redis"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="redis"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/21/SQL_redis/" title="redis">redis</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-21T06:54:45.000Z" title="发表于 2022-12-21 14:54:45">2022-12-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/SQL/">SQL</a></span></div><div class="content">数据类型以及命令行操作
-redis的数据结构： redis存储的是：key,value格式的数据，其中key都是字符串，value有5种不同的数据结构
+123456789101112131415161718192021222324252627282930313233343536373839404142Exception in thread &quot;http-bio-8080-exec-5&quot; java.lang.InternalError: Can&#x27;t connect to X11 window server using &#x27;localhost:10.0&#x27; as the value of the DISPLAY variable.	at sun.awt.X11GraphicsEnvironment.initDisplay(Native Method)	at sun.awt.X11 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/11/14/Verilog_%E5%9F%BA%E4%BA%8EFSM%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96%E6%A8%A1%E5%9D%97/" title="基于FSM按键消抖模块"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于FSM按键消抖模块"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/14/Verilog_%E5%9F%BA%E4%BA%8EFSM%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96%E6%A8%A1%E5%9D%97/" title="基于FSM按键消抖模块">基于FSM按键消抖模块</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-14T11:46:07.000Z" title="发表于 2022-11-14 19:46:07">2022-11-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Verilog/">Verilog</a></span></div><div class="content">
+​	由于实际的波动开关和按键开关都是机械式的设备，开关动作来回多次抖动之后才能稳定下来，这个过程就会发生抖动，如图所示而在FPGA内部的时钟频率很高，因此这一过程都会被FPGA当作命令处理，这是我们所不希望的
+​	这时候我们就需要使用消抖模块，目的就是出去机械开关产生的抖动信号。目前对此模块的实现有很多方法，这里采用一种比较优秀的优先状态机的实现方式。
 
-字符串类型 string
 
-哈希类型 hash ： map格式  
 
-列表类型 list ： linkedlist格式。支持重复元素
+基于FSM设计的消抖电路，是利用一个10ms的非同步定时器和有限状态机来完成的，计时器每10ms（近似，下面代码可以看出）产生一个滴答使能周期信号(脉冲信号)，有限状态机则利用此信号来确定输入是否稳定。
 
-集合类型 set  ： 不允许重复元素
+在这个设计方案中，FSM将消除时间较短的抖动，当输入信号稳定后再过20ms采取改变输出值。
 
-有序集合类型 sortedset：不允许重复元素，且元素有顺序
+下面给出状态转换图：
 
 
 
-命令行操作
 
-字符串类型 String
- 1231. 存储： set key value2. 获取： get key3. 删除： del key
 
-哈希类型 Hash
-123451.存储：hset key field value2.获取：	- hget key field	- hgetall key3.删除：hdel key field
+下面给出Verlog代码：
 
-列表类型 List
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/11/11/Verilog_ILA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="ILA的使用教程"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ILA的使用教程"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/11/Verilog_ILA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="ILA的使用教程">ILA的使用教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-11T02:36:29.000Z" title="发表于 2022-11-11 10:36:29">2022-11-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Verilog/">Verilog</a></span></div><div class="content">1.ILA工具简介​	在FPGA开发中，当完成代码设计后，为验证代码的正确性和不同条件下的可靠性，设计师往往优先想到逻辑仿真进行相关验证。​	而使用仿真需要设计人员写出tb代码，从而增加代码的书写量，随之而产生提高验证工作的门槛和排除错误的工作量等一系列问题。而产生提高验证工作的门槛和排除错误的工作量等一系列问题。特别是对于刚刚步入FPGA殿堂的初学者，有时候很难对testbench的设计方法有准确的把握，甚至将testbench 的书写规则和设计源码的规则混淆，从而对学习源码设计产生适得其反的效果。​	使用仿真进行逻辑验证还有另一个局限性，例如有些只有在班机上有的物理特性，很难通过仿真的方法测试。​	最后，仿真大多适用于以时间为标尺，对条件变化有清晰的时间节点预设的验证需求。这就导致对工程的验证很难形成FPGA芯片、计算机和人的三者互动，也很难通过捕捉随机触发条件而进行验证，从而使触发条件的选择，受较大的局限性​	能够较好解决上述问题的一种方案，是考虑使用逻辑分析仪。而采用传统的逻辑分析仪，有存在额外的设备采购开销。因此FPGA厂商推出了一定程度上能够代替逻辑分析仪的在线调试工具。
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/11/09/Verilog_%E5%88%A9%E7%94%A8%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%94%AE%E5%8D%96%E6%9C%BA/" title="利用有限状态机实现自动售卖机"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用有限状态机实现自动售卖机"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/09/Verilog_%E5%88%A9%E7%94%A8%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%94%AE%E5%8D%96%E6%9C%BA/" title="利用有限状态机实现自动售卖机">利用有限状态机实现自动售卖机</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-09T03:27:48.000Z" title="发表于 2022-11-09 11:27:48">2022-11-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Verilog/">Verilog</a></span></div><div class="content">
+利用有限状态机之间的状态变化设计饮料自动投币售卖机的核心控制电路
 
+要求：简化考虑，假设饮料只有一种价格为2.5元。硬币有0.5元和1.0元两种，考虑找零，用Verilog描述其控制电路，并用FPGA实现
 
- 1234567891.添加：	- lpush key value	- rpush key value2.获取：lrange key start end	- 一般使用 lrange key 0 -1 来获取全部数据3.删除：	- l ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/12/21/JSON_JSON%E8%A7%A3%E6%9E%90%E5%99%A8/" title="JSON解析器"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JSON解析器"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/21/JSON_JSON%E8%A7%A3%E6%9E%90%E5%99%A8/" title="JSON解析器">JSON解析器</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-21T05:15:51.000Z" title="发表于 2022-12-21 13:15:51">2022-12-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JSON/">JSON</a></span></div><div class="content">JSON与Java对象互转
-注意：json在前端(js)中的表现是一个对象，在用ajax接受的时候可以设置返回对象类型为json，将其从后端发送的字符串重新转为json
+基本设计步骤:
 
+分析输入输出信号
+❗状态转换图
+根据状态转化图进行Verilog语言描述
+仿真以及班机调试
 
-JSON转为Java对象
 
-选择合适的解析器，以jackson为例
-导入jackson的相关jar包
-创建jackson核心对象 ObjectMapper
-调用ObjectMapper的相关方法进行转化
-readValue(String json,class)
 
 
+分析输入输出信号
 
+12345678910输入信号： clk，rst；输入信号：操作开始: op_start； //定义1开始操作输入信号：投币币值: coin_val；//定义2’b01表示0.5元； 2’b10表示1元输入信号：取消操作指示 : cancel_flag; //定义1为取消操作输出信号：机器是否占用: hold_ind；//定义0为不占用，可以使用输出信号：取饮料信号: drinktk_ind；//定义1为取饮料输出信号：找零与退币标志信号: charge_ind; //定义1为找零输出信号：找零与退币币值： charge_val;//定义3’b001表示找0.5元； 3’b010表示找1元// 3’b011表示找1.5元; 3’b100表示找2 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/11/07/Verilog_101%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84Verilog%E6%8F%8F%E8%BF%B0/" title="101序列检测器的Verilog描述（Moore&amp;Mealy）"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="101序列检测器的Verilog描述（Moore&amp;Mealy）"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/07/Verilog_101%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84Verilog%E6%8F%8F%E8%BF%B0/" title="101序列检测器的Verilog描述（Moore&amp;Mealy）">101序列检测器的Verilog描述（Moore&amp;Mealy）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-07T00:52:41.000Z" title="发表于 2022-11-07 08:52:41">2022-11-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Verilog/">Verilog</a></span></div><div class="content">
+序列检测器
 
-Java对象转为JSON
+设计“1101”序列检测的状态转换图;
+设计一个 8 位并转串输出模块 par2ser。该器件有 8 位输入 d[7:0]，1 位输出 q，另有一个 clk 端，一个 set 端。set端上升沿将 8位输入锁存到逻辑右移移位寄存器中。
+调用并转串输出模块，使用Verilog HDL语言的行为描述方式实现一个摩尔状态机，能检测一个8位的二进制数据中是否存在“1101”序列，如果检测到该序列则指定的LED灯亮；
+综合、实现、生成bit流，下载到Nexys4开发板进行验证；
 
-选择合适的解析器，以jackson为例
-导入jackson的相关jar包
-创建jackson核心对象 ObjectMapper
-调用ObjectMapper的相关方法进行转化
-方法
-writeValue(参数1,obj):参数1：
-File:将obj对象转化为JSON字符串，并保存在对应的文件中
-Writer:将obj对象转化为JSON字符串，并将JSON字符串填充到字符输入流中
-OutputStream:将obj对象转化为JSON字符串，并将JSON字符串填充到字节输入流中
 
 
-writeValueAsString(ob ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/12/20/JS%E6%A1%86%E6%9E%B6_JQuery/" title="JQuery"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JQuery"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/20/JS%E6%A1%86%E6%9E%B6_JQuery/" title="JQuery">JQuery</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-20T04:33:18.000Z" title="发表于 2022-12-20 12:33:18">2022-12-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JS/">JS</a></span></div><div class="content">1. JS和JQ对象的相互转换1. jQuery对象获取的是一个object，js获取的是一个集合
-2. 两者互相转换
- - JQ--&gt;JS	:	jQ对象[索引] 或者 jQ对象.get(索引)
- - JS--&gt;JQ	:	$(JS对象)  
+经典的有限状态机三段式设计
 
-2.DOM操作1. 内容操作
-    1. html(): 获取/设置元素的标签体内容   
-    2. text(): 获取/设置元素的标签体纯文本内容   
-    3. val()： 获取/设置元素的value属性值
-2. 属性操作
-    1.通用属性操作
-        1. attr(): 获取/设置元素的属性
-        2. removeAttr():删除属性
-        3. prop():获取/设置元素的属性
-        4. removeProp():删除属性
+Moore型123456789101112131415161718192021222324252627282930always@(poesedge clk or rst_n) begin    if(clr) state&lt;=S0;    else state&lt;=next_state;//当时钟来的时候，将next_state(通过一系列的组合逻辑从激励和输入中得到的次态)赋给stateendalways@(state or x) begin //当前的输入和 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/11/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_%E5%BE%AE%E4%BF%A1%E7%9A%84OpenID%E5%92%8CUnionID/" title="微信的OpenID和ＵｎｉｏｎＩＤ"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信的OpenID和ＵｎｉｏｎＩＤ"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_%E5%BE%AE%E4%BF%A1%E7%9A%84OpenID%E5%92%8CUnionID/" title="微信的OpenID和ＵｎｉｏｎＩＤ">微信的OpenID和ＵｎｉｏｎＩＤ</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-05T08:59:52.000Z" title="发表于 2022-11-05 16:59:52">2022-11-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></span></div><div class="content">OpenID和unionidOpenID：为了识别用户，每个用户针对每个公众号或小程序等应用会产生一个安全的OpenID，公众号或应用可将此ID进行存储，便于用户下次登录时辨识其身份，或将其与用户在第三方应用中的原有账号进行绑定UnionId:UnionId也是用户的标识符，但它与OpenID不同的是，同一个微信用户，登录同一个开发主体下的多个小程序或公众号的时候，分配的UnionId是一样的。
 
-        * attr和prop区别？
-        * prop:property
-        * attr:attribute
-        1. 如果操作的是元素的固有属性，则使用prop
-        2. 如果操作 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/12/19/Java_Java%E5%A2%9E%E5%BC%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95/" title="Java增强对象的方法"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java增强对象的方法"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/19/Java_Java%E5%A2%9E%E5%BC%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95/" title="Java增强对象的方法">Java增强对象的方法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-19T08:27:30.000Z" title="发表于 2022-12-19 16:27:30">2022-12-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">
-可以采用一些设计模式，用于将对象方法进行增强，例如改变参数，函数体，返回值;相当于来说就是重写了方法的对象。【需要拥有同样的接口】
-设计模式：一些通用的解决固定问题的方式
+可以打个通俗的比喻，比如某个用户是万达商场的会员，那么UnionId就是这个用户对应的万达会员标识，而这个用户又比较爱买买买，在万达商场的很多商店下面都是会员，那么此时每个商店赋予这个用户的会员号就相当于OpenID了，总而言之，在同一个开发体下，UnionId是唯一的，而OpenID不一定唯一。
 
+微信授权登录整个过程可以总结成以下步骤:
 
+引导进入授权页用户授权需要进入以下页面（页面链接参数解释如上表所示）：https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&amp;redirect_uri=REDIRECT_U ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/11/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_%E5%BE%AE%E4%BF%A1%E4%BA%91%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" title="微信云开发实战"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信云开发实战"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_%E5%BE%AE%E4%BF%A1%E4%BA%91%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" title="微信云开发实战">微信云开发实战</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-03T07:07:03.000Z" title="发表于 2022-11-03 15:07:03">2022-11-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></span></div><div class="content">云开发与传统的区别传统互联网软件的运作模式
 
-增强对象的方法的设计模式
-装饰模式
+后端服务器运行操作系统，接收到网络请求之后，利用运行在服务端的语言（node.js）去操作用户的逻辑，负责从数据库或者磁盘中拉去数据，再返回到前端
 
-代理模式
+云开发
+无需开发者搭建和运维服务器
+可以轻松识别用户身份
+拥有四大能力
+云函数 ：可以直接获取当前微信用户的身份
+云数据库： 一个云端的易操控的数据库
+云储存： 可以直接在小程序前端上传&#x2F;下载文件
+云调用： 可以直接使用小程序开放接口
 
-概念：
 
-真实对象
-代理对象
-代理模式
 
 
-实现方式
+因此我们在后端只需要专注与实现用户逻辑的实现即可
+小程序在云开发下的运作模式
+小芝士1.Js变量的定义四种定义方式
+12345var x= 10 //局部定义，函数内定义，函数外不可以访问。// 注意var，let如果在函数（块）外定义，相当于属于整个大的，那么在函数内是可以访问的x = 10 //全局定义，函数内定义，函数外也可以访问let x = 10 //块内定义，块外不可以访问const x=10 //不可以修改了
 
-静态代理：有一个类文件描述代理模式
 
-动态代理：自动加载代理类，在内存中形成。使用较多，有Proxy类来帮助实现；
 
-增强方式
+2. 同步和异步
+同步： 下一行代码必须等待上一行代码执行完成，才能执行
 
-增强参数列表
-增强返回值类型
-增强函数体内容（但只能增强其上下文内容）
+关心代码执行结果的，顺序执行，保证结果的 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/11/01/Arduino_%E6%99%BA%E8%83%BD%E5%9E%83%E5%9C%BE%E6%A1%B6/" title="智能垃圾桶"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="智能垃圾桶"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/11/01/Arduino_%E6%99%BA%E8%83%BD%E5%9E%83%E5%9C%BE%E6%A1%B6/" title="智能垃圾桶">智能垃圾桶</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-11-01T15:10:45.000Z" title="发表于 2022-11-01 23:10:45">2022-11-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Arduino/">Arduino</a></span></div><div class="content">基于Arduino的智能垃圾桶使用LD3320语言识别开发板模块，SYN6288语言合成开发板模块，Arduino uno r3开发板，手扫传感器（目前还没选好具体型号），SG90舵机，实现功能：
 
+手扫自动打开、关闭垃圾桶
+语言识别垃圾种类自动打开相应垃圾桶，延时关闭
 
-实现方式:
-123456789101112131415161718192021222324252627282930313233343536//例如我们需要写一个filter来增加HttpRequest对象的getParameter()方法//使其能够在参数的值为敏感词的时候自动替换成 ***    @Override    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, Filter ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/12/16/JavaWeb_Jsp/" title="Jsp"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Jsp"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/16/JavaWeb_Jsp/" title="Jsp">Jsp</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-16T05:14:29.000Z" title="发表于 2022-12-16 13:14:29">2022-12-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaWeb/">JavaWeb</a></span></div><div class="content">JSP
-概念：JavaServer Pages，可以通过特殊的标签将Java代码放入HTML中以实现动态内容开发。事实上就是一个系统自动生成的Servlet对象，会将写的java代码和网页都放在service()函数中
+目前进度：
 
-指令：
+架构已完成
+功能（语言识别垃圾种类自动打开相应垃圾桶，延时关闭）已完成
 
-用于配置JSP页面
-分类
-page	：配置JSP页面
-contentType:等同于response.setContentType()
-告诉浏览器我的MIME类型以及字符集
-设置我当前的字符集
+任务：
 
+关于项目的一系列申报书…
 
+功能（手扫自动打开、关闭垃圾桶）
 
+垃圾桶的设计制造
 
-include ：导入页面的资源文件（相当于把别的页面复制过来）
-taglib    ：导入标签资源（相当于标签包）
-假如我需要使用JSP标准标签库，那么我就需要引用JSTL。(JSP  standarded tag library)
+目前是用面包板连线，有时间可以考虑用电路板，减少连线
 
-
-
-
-
-
-内置对象：
-
-在jsp页面中不需要创建的对象。原因：在JSP转化为Servlet后，在service函数中已经被创建的对象。
-
-
-
-
-
-
-变量名
-真实类型
-作用
-
-
-
-pageContext
-PageContext
-当前页面共享数据，还可以获取其他八个内置对象
-
-
-request
-HttpServletRequest ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/12/15/JavaWeb_Http%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" title="Http会话技术"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Http会话技术"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/15/JavaWeb_Http%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" title="Http会话技术">Http会话技术</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-15T03:29:04.000Z" title="发表于 2022-12-15 11:29:04">2022-12-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaWeb/">JavaWeb</a></span></div><div class="content">会话
-概念：一次会话中可以包含多次请求和响应
-功能：在一次会话的多次请求内共享数据
-方式：
-
-
-服务器端会话技术：Session
-客户端会话技术：Cookies
-
-Cookies
-概念：客户端会话技术，将数据保存到客户端
-
-实现原理：（事实上就是基于HTTP协议完成的技术）
-
-服务端通过responseHeader中set-cookies返回数据给客户端
-客户端解析responseHeader并将cookies数据存储
-在下一次请求中，在requestHeader中携带Cookies传给服务器
-
-
-细节：
-
-cookies的生命周期
-
-默认情况下存储在浏览器内存中，关闭即释放
-setMaxAge(int seconds)
-正数：将Cookies数据写到硬盘中，secounds秒后删除
-负数：默认
-零：给浏览器发送请求，让浏览器立马删除硬盘中的cookies
-
-
-
-
-cookies共享问题
-
-通过setPath(String path)方法指定 cookies在服务器中多个项目的共享域
-通过setDomain(String path)方法指定 cookies在不同服务器之间的共享域，若设 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/12/13/ServletContext%E5%AF%B9%E8%B1%A1/" title="ServletContext对象"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ServletContext对象"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/13/ServletContext%E5%AF%B9%E8%B1%A1/" title="ServletContext对象">ServletContext对象</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-13T08:26:59.000Z" title="发表于 2022-12-13 16:26:59">2022-12-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaWeb/">JavaWeb</a></span></div><div class="content">
-概念：(环境对象)代表整个web应用，可以和程序的容器(服务器Tomcat)来通信
-
-获取：
-
-通过request对象获取
-
-通过HttpServlet获取
-
-功能：
-
-获取MINE类型
-
-MINE类型：在互联网通讯的过程中定义的一种文件数据类型；例： text&#x2F;html
-
-
-域对象：共享数据
-
-域范围：所有用户，所有请求。（对象的生命周期很长，从服务器开始到服务器关闭）
-
-
-获取文件在服务器下的真实路径
-
-getRealPath(“&#x2F;b.txt”)  –&gt;事实上就是项目根目录的b.txt，也就是web目录下的
-getRealPath(&#x2F;WEB-INF&#x2F;class&#x2F;a.txt)       —&gt;src下的东西到最后会被放到web&#x2F;WEB-INF下的class目录下
-使用classLoader可以获取src下的资源路径也就是因为 src下的东西会被classLoader一起放到class目录下
-
-
-
-
-本质：获取Web应用在服务器中的根路径(也就是web文件夹的路径)，然后再和用户提供的参数进行拼接。
-
-
-
-
-
-</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/12/13/HTTP_HTTP%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/" title="response对象获取的io流中文乱码问题"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="response对象获取的io流中文乱码问题"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/13/HTTP_HTTP%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/" title="response对象获取的io流中文乱码问题">response对象获取的io流中文乱码问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-13T07:16:36.000Z" title="发表于 2022-12-13 15:16:36">2022-12-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/HTTP/">HTTP</a></span></div><div class="content">
-Response对象获取的字符输出流默认使用的是ISO编码，因此我们必须在获取流对象之前设置编码格式为UTF-8：response.setCharacterEncoding(“utf-8”)
-但是这样只不过是保证了通过res获取的io流以utf-8编码，解码还是不知道怎么解码，在不同的浏览器上可能解码的方式便不同，因此我们要用响应头的方式告知浏览器该怎么解码，response.setHeader(“content-type”,”text&#x2F;html;charset&#x3D;utf-8”)
-同时还有简化的版本：response.setContentType(“text&#x2F;html;charset&#x3D;utf-8”)，同时也需要在获取流之前设置。
-
-</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/12/08/Java_JDBC/" title="JDBC"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JDBC"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/08/Java_JDBC/" title="JDBC">JDBC</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-08T09:15:05.000Z" title="发表于 2022-12-08 17:15:05">2022-12-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">
-全称：Java Database connect
-本质：SUM公司定义的一套操作关系型数据库的接口。各个数据库厂商需要去实现接口，构建实现类，并且打包提供jar包。Coder可以使用这套接口（JDBC）编程，真正执行的代码是Jar包中的实现类。
-
-对象：
-
-DriverManager：驱动管理器对象，定义在java.sql中
-
-注册驱动（告诉程序该使用哪一个驱动jar包来操作数据库\操作的是什么数据库）
-1234561.DriverManager.registerDriver(new com.mysql.jdbc.Driver());2.Class.forname(&quot;com.mysql.jdbc.Driver&quot;);//这句代码加载了Driver类，而此类中有静态代码块，其中便是1代码加上trycatch语句
-
-获取数据库连接：
-
-static Connection getConnection();
-
-
-
-
-Connection:数据库连接对象
-
-获取Statement\PrepareStatement对象
-管理事务
-
-
-Statement: 执行SQL语句对象
-
- ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://saladday-figure-bed.oss-cn-chengdu.aliyuncs.com/img/mmexport1667394117445.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SaladDay</div><div class="author-info__description">其实不会敲代码</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SaladDay"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:1203511142@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="sun-awt-X11GraphicsEnvironment"/></a><div class="content"><a class="title" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment">sun-awt-X11GraphicsEnvironment</a><time datetime="2022-12-28T04:37:33.000Z" title="发表于 2022-12-28 12:37:33">2022-12-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/21/SQL_redis/" title="redis"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="redis"/></a><div class="content"><a class="title" href="/2022/12/21/SQL_redis/" title="redis">redis</a><time datetime="2022-12-21T06:54:45.000Z" title="发表于 2022-12-21 14:54:45">2022-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/21/JSON_JSON%E8%A7%A3%E6%9E%90%E5%99%A8/" title="JSON解析器"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JSON解析器"/></a><div class="content"><a class="title" href="/2022/12/21/JSON_JSON%E8%A7%A3%E6%9E%90%E5%99%A8/" title="JSON解析器">JSON解析器</a><time datetime="2022-12-21T05:15:51.000Z" title="发表于 2022-12-21 13:15:51">2022-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/20/JS%E6%A1%86%E6%9E%B6_JQuery/" title="JQuery"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JQuery"/></a><div class="content"><a class="title" href="/2022/12/20/JS%E6%A1%86%E6%9E%B6_JQuery/" title="JQuery">JQuery</a><time datetime="2022-12-20T04:33:18.000Z" title="发表于 2022-12-20 12:33:18">2022-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/19/Java_Java%E5%A2%9E%E5%BC%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95/" title="Java增强对象的方法"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java增强对象的方法"/></a><div class="content"><a class="title" href="/2022/12/19/Java_Java%E5%A2%9E%E5%BC%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95/" title="Java增强对象的方法">Java增强对象的方法</a><time datetime="2022-12-19T08:27:30.000Z" title="发表于 2022-12-19 16:27:30">2022-12-19</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+如果有同学会微信小程序开发或者是移动应用开发的，可以增加手机端控制功能 （机器可以加蓝牙串口通讯，手机端控制应该不难）
+
+
+一、简介本设计是基于单片机的垃圾桶系统，主要实现以下功能：
+·可实现通过舵机完成垃圾桶盖的自动开关
+·可实现LED显示垃圾桶是否满了以及开盖状态
+·可实现自动定时紫外线灯进行消毒。（新加入）
+·语言识别具体垃圾类型，并合成语言回复，同时打开相应垃圾桶
+·可实现检测人员手势，对垃圾桶盖进行开关。
+·可实现当垃圾桶装满时LED灯提示显示：垃圾桶已满。清理完成后，正常 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/06/05/Java-reflect/" title="Java_reflect"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java_reflect"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/06/05/Java-reflect/" title="Java_reflect">Java_reflect</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-06-05T08:33:45.000Z" title="发表于 2022-06-05 16:33:45">2022-06-05</time></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/01/29/%E6%9D%82%E8%B0%88_%E6%B5%85%E6%9E%90SSH%E6%8A%80%E6%9C%AF%E4%BB%A5%E5%8F%8A%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E7%9A%84%E5%8E%9F%E7%90%86/" title="浅析SSH技术以及免密登录的原理"><img class="post_bg" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="浅析SSH技术以及免密登录的原理"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/01/29/%E6%9D%82%E8%B0%88_%E6%B5%85%E6%9E%90SSH%E6%8A%80%E6%9C%AF%E4%BB%A5%E5%8F%8A%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E7%9A%84%E5%8E%9F%E7%90%86/" title="浅析SSH技术以及免密登录的原理">浅析SSH技术以及免密登录的原理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-01-29T08:03:41.000Z" title="发表于 2022-01-29 16:03:41">2022-01-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span></div><div class="content">介绍SSH以往的网络通信采用明文传输的方式(Telent)，这种方式一般在公司内网（绝对安全的网络）比较常见。
+现在主要的加密算法有两种：对称加密和非对称加密。
+
+对称加密使用同一个密钥来进行加密和解密，这样在传输时是安全可靠的。但是如果集群过大，（每一个集群会有一个密钥，那么一个用户会有非常多个密钥）会导致算法复杂以及若一个客户端的的密钥被窃取，则整个系统的安全性便不复存在。
+非对称加密有两个密钥：公钥和私钥。公钥由私钥产生，但却无法推算出私钥；公钥加密后的密文，只能通过对应的私钥来解密。
+
+有三种登录方式：密码登录，密钥登录和All登录1. 密码登录
+初始状态：topgun终端要登录Server服务器，发起连接请求ssh work@server.com
+
+服务端运行有ssh服务，因此可以生成一对公钥和私钥；此时将公钥返回给客户端
+客户端使用公钥，对登录密码进行加密，（如服务器work用户密码为xxx），生成公钥加密字符串
+客户端将公钥加密字符串发送给服务端
+服务端使用私钥，解密公钥加密字符串，得到原始密码
+校验密码是否合法（此为本机work密码）
+返回登录结果给客户端：成功登录或密 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://saladday-figure-bed.oss-cn-chengdu.aliyuncs.com/img/mmexport1667394117445.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SaladDay</div><div class="author-info__description">其实不会敲代码</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SaladDay"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:1203511142@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="sun-awt-X11GraphicsEnvironment"/></a><div class="content"><a class="title" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment">sun-awt-X11GraphicsEnvironment</a><time datetime="2022-12-28T04:37:33.000Z" title="发表于 2022-12-28 12:37:33">2022-12-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/14/Verilog_%E5%9F%BA%E4%BA%8EFSM%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96%E6%A8%A1%E5%9D%97/" title="基于FSM按键消抖模块"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于FSM按键消抖模块"/></a><div class="content"><a class="title" href="/2022/11/14/Verilog_%E5%9F%BA%E4%BA%8EFSM%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96%E6%A8%A1%E5%9D%97/" title="基于FSM按键消抖模块">基于FSM按键消抖模块</a><time datetime="2022-11-14T11:46:07.000Z" title="发表于 2022-11-14 19:46:07">2022-11-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/11/Verilog_ILA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="ILA的使用教程"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ILA的使用教程"/></a><div class="content"><a class="title" href="/2022/11/11/Verilog_ILA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="ILA的使用教程">ILA的使用教程</a><time datetime="2022-11-11T02:36:29.000Z" title="发表于 2022-11-11 10:36:29">2022-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/09/Verilog_%E5%88%A9%E7%94%A8%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%94%AE%E5%8D%96%E6%9C%BA/" title="利用有限状态机实现自动售卖机"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用有限状态机实现自动售卖机"/></a><div class="content"><a class="title" href="/2022/11/09/Verilog_%E5%88%A9%E7%94%A8%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%94%AE%E5%8D%96%E6%9C%BA/" title="利用有限状态机实现自动售卖机">利用有限状态机实现自动售卖机</a><time datetime="2022-11-09T03:27:48.000Z" title="发表于 2022-11-09 11:27:48">2022-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/07/Verilog_101%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84Verilog%E6%8F%8F%E8%BF%B0/" title="101序列检测器的Verilog描述（Moore&amp;Mealy）"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="101序列检测器的Verilog描述（Moore&amp;Mealy）"/></a><div class="content"><a class="title" href="/2022/11/07/Verilog_101%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84Verilog%E6%8F%8F%E8%BF%B0/" title="101序列检测器的Verilog描述（Moore&amp;Mealy）">101序列检测器的Verilog描述（Moore&amp;Mealy）</a><time datetime="2022-11-07T00:52:41.000Z" title="发表于 2022-11-07 08:52:41">2022-11-07</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             <a class="card-more-btn" href="/categories/" title="查看更多">
@@ -402,7 +272,7 @@ Statement: 执行SQL语句对象
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Arduino/"><span class="card-category-list-name">Arduino</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Debug/"><span class="card-category-list-name">Debug</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GIT/"><span class="card-category-list-name">GIT</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HTTP/"><span class="card-category-list-name">HTTP</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JS/"><span class="card-category-list-name">JS</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JSON/"><span class="card-category-list-name">JSON</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JavaWeb/"><span class="card-category-list-name">JavaWeb</span><span class="card-category-list-count">3</span></a></li>
-            </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">34</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-12-28T09:49:00.299Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By SaladDay</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>function subtitleType () {
+            </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">34</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-01-03T13:21:22.780Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By SaladDay</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>function subtitleType () {
   if (true) { 
     window.typed = new Typed("#subtitle", {
       strings: ["记录菜狗的成长。"],

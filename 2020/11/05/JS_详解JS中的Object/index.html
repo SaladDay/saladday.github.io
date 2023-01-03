@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>详解JS中的Object | SaladDay的Blog</title><meta name="author" content="SaladDay"><meta name="copyright" content="SaladDay"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="详解 JS 中的 Object从本质上看，Object 是一个构造函数，用于创建对象。 一、Object 构造函数的属性在 Object 中声明的属性只有两个： Object.length —— 值为1Object.prototype —— 指向 Object 函数的原型对象二、静态方法静态方法就是直接定义在 Object 函数上的方法，注意与实例方法区分！！！调用的方式也不同，直接通过 Obje">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解JS中的Object">
+<meta property="og:url" content="http://www.saladday.top/2020/11/05/JS_%E8%AF%A6%E8%A7%A3JS%E4%B8%AD%E7%9A%84Object/index.html">
+<meta property="og:site_name" content="SaladDay的Blog">
+<meta property="og:description" content="详解 JS 中的 Object从本质上看，Object 是一个构造函数，用于创建对象。 一、Object 构造函数的属性在 Object 中声明的属性只有两个： Object.length —— 值为1Object.prototype —— 指向 Object 函数的原型对象二、静态方法静态方法就是直接定义在 Object 函数上的方法，注意与实例方法区分！！！调用的方式也不同，直接通过 Obje">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg">
+<meta property="article:published_time" content="2020-11-05T08:23:21.000Z">
+<meta property="article:modified_time" content="2023-01-03T13:19:53.708Z">
+<meta property="article:author" content="SaladDay">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.saladday.top/2020/11/05/JS_%E8%AF%A6%E8%A7%A3JS%E4%B8%AD%E7%9A%84Object/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '详解JS中的Object',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-01-03 21:19:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><style>#article-container.post-content h1:before, h2:before, h3:before, h4:before, h5:before, h6:before { -webkit-animation: avatar_turn_around 1s linear infinite; -moz-animation: avatar_turn_around 1s linear infinite; -o-animation: avatar_turn_around 1s linear infinite; -ms-animation: avatar_turn_around 1s linear infinite; animation: avatar_turn_around 1s linear infinite; }</style><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body><link rel="stylesheet" href="/css/corner-indicator.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://saladday-figure-bed.oss-cn-chengdu.aliyuncs.com/img/mmexport1667394117445.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives"><span> 所有文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">SaladDay的Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives"><span> 所有文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">详解JS中的Object</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-05T08:23:21.000Z" title="发表于 2020-11-05 16:23:21">2020-11-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-03T13:19:53.708Z" title="更新于 2023-01-03 21:19:53">2023-01-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="详解JS中的Object"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>详解 JS 中的 Object<br>从本质上看，Object 是一个构造函数，用于创建对象。</p>
+<p>一、Object 构造函数的属性<br>在 Object 中声明的属性只有两个：</p>
+<p>Object.length —— 值为1<br>Object.prototype —— 指向 Object 函数的原型对象<br>二、静态方法<br>静态方法就是直接定义在 Object 函数上的方法，注意与实例方法区分！！！调用的方式也不同，直接通过 Object.xxx() 的方式调用。</p>
+<p>Object.assign(target,…assign)<br>作用：将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。<br>简单来说，该方法可以接收多个参数，其中第一个参数作为目标对象，剩下的都是源对象。该方法将所有源对象的可枚举属性复制（浅复制）到目标对象中，结果返回目标对象。该方法会直接改变目标对象。</p>
+<p>const target &#x3D; {name:”test”,sex:1};<br>const source &#x3D; {address:”sz”,gender:”male”}<br>Object.assign(target,source);<br>console.log(target);&#x2F;&#x2F;{name: “test”, sex: 1, address: “sz”, gender: “male”}</p>
+<p>如果使用 ES6 的语法来实现这种需求就很简洁了：</p>
+<p>let target &#x3D; {name:”test”,sex:1};<br>let source &#x3D; {address:”sz”,gender:”male”}<br>target &#x3D; {…target,…source}</p>
+<p>三点运算符也是通过浅复制来实现拷贝的。</p>
+<p>注意：如果目标对象中的属性具有相同的键，则属性将被源对象的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象属性。</p>
+<p>Object.create(proto,propertiesObject)<br>该方法用于创建新对象。第一个参数用于指定新建对象的原型对象；第二个参数是对象的属性描述对象。方法返回新建的对象。</p>
+<p>在默认的情况下，我们通过对象字面量的方式 {} 创建的对象的原型对象就是 Object ，然而，通过该方法就可以指定一个新建对象的原型对象，从而改变原型链的结构。</p>
+<p>function Person() {}<br>Person.prototype.hello &#x3D; function (){<br>    console.log(“hello”)<br>}<br>let person &#x3D; Object.create(Person.prototype,{<br>    name:{<br>        value:”test”,<br>        writable:true,<br>        configurable:true,<br>    },<br>    age:{<br>        value:1,<br>        writable:true,<br>        configurable:true,<br>    }<br>})<br>console.log(person)&#x2F;&#x2F;Person {name: “test”, age: 1}<br>person.hello()&#x2F;&#x2F;hello</p>
+<p>Object.defineProperty(obj,prop,desc)<br>在对象 obj 上定义新的属性，或者修改对象 obj 中的属性，结果返回对象 obj。</p>
+<p>该方法有三个参数，第一个参数 obj 是目标对象，第二个参数 prop 是属性键名，第三个参数是这个属性的描述符。</p>
+<p>let person &#x3D; {}<br>Object.defineProperty(person,”name”,{<br>    value : “test”,<br>    writable : true,<br>    enumerable : true,<br>    configurable : true<br>})<br>console.log(person)&#x2F;&#x2F;{name: “test”}</p>
+<p>也许你会感到疑惑，给对象定义属性或修改属性不是直接通过对象字面量的方法更加简洁吗？</p>
+<p>是的，如果只是简单的添加或者修改属性，那么必然是对象字面量的方式更为直观。但是，这种方式并不是万能的，在某些场景下就需要使用到这个方法。</p>
+<p>比如，在 Vue 的底层实现数据绑定中就使用到了这个方法。</p>
+<p>扩展：属性描述符有两种：</p>
+<p>数据描述符。具有值的属性。<br>存取描述符。由 getter 和 setter 函数对属性的描述。<br>一个属性只能是其中的一种描述符。</p>
+<p>描述符通用属性：</p>
+<p>configurable —— 布尔值，默认值为 false 。若值为 true，则表示这个属性描述符可以被改变，同时该属性也能从对象上删除。<br>enumerable —— 布尔值，默认值为 false。表示是否能枚举<br>数据描述符特有的属性：</p>
+<p>value —— 该属性的值，默认值为 undefined<br>writable —— 布尔值，默认值为 false，表示是否能重写。<br>存取描述符特有的属性：</p>
+<p>get:function —— 默认值为 undefined，当访问该属性时，该方法会被执行。<br>set:function —— 默认值为 undefined，当属性修改时，触发执行改方法，该方法接收一个参数，就是该属性新的值。</p>
+<p>Object.entries(obj)<br>该方法返回对象 obj 自身的可枚举属性的键值对数组。结果是一个二维数组，数组中的元素是一个由两个元素 key ，value 组成的数组。</p>
+<p>let person &#x3D; {name:”test”,sex:1}<br>let arr &#x3D; Object.entries(person)<br>console.log(arr)&#x2F;&#x2F;[[“name”, “test”],[“sex”, 1]]</p>
+<p>该方法的使用场景是：将普通的对象转换为 Map：</p>
+<p>let person &#x3D; {name:”test”,sex:1}<br>let map &#x3D; new Map(Object.entries(person))<br>console.log(map)&#x2F;&#x2F;Map(2) {“name” &#x3D;&gt; “test”, “sex” &#x3D;&gt; 1}</p>
+<p>相似的，还有两个方法可以取出对象的键名或键值：</p>
+<p>Object.keys(obj) —— 返回一个对象中的可枚举属性组成的数组<br>Object.values(obj) —— 返回一个对象中的可枚举属性值组成的数组。</p>
+<p>Object.freeze(obj)<br>该方法用于冻结对象，一个被冻结的对象不能被修改，不能添加新的属性，不能修改属性的描述符，该对象的原型对象也不能修改。返回值为被冻结的对象。</p>
+<p>let person &#x3D; {name:”test”,sex:1}<br>Object.freeze(person)<br>person.address &#x3D; “sz”<br>person.sex&#x3D; 2<br>console.log(person)&#x2F;&#x2F;{name: “test”, sex: 1}</p>
+<p>Object.getOwnPropertyDescriptor(obj,prop)<br>该方法用于返回指定对象上自有属性对应的属性描述符。</p>
+<p>let obj &#x3D; {}<br>Object.defineProperty(obj,”name”,{<br>    configurable:false,<br>    enumerable:true,<br>    writable:true,<br>    value:”test”<br>})<br>let descriptor &#x3D; Object.getOwnPropertyDescriptor(obj,”name”)<br>console.log(descriptor)&#x2F;&#x2F;{value: “test”, writable: true, enumerable: true, configurable: false}</p>
+<p>Object.getOwnPropertyNames(obj)<br>该方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括 Symbol 作为键名的属性）组成的数组。</p>
+<p>该方法包含的范围比 Object.keys() 广。</p>
+<p>let obj &#x3D; {}<br>Object.defineProperty(obj,”name”,{<br>    configurable:false,<br>    enumerable:false,<br>    writable:true,<br>    value:”Jonas”<br>})<br>Object.defineProperty(obj,Symbol(),{<br>    configurable:false,<br>    enumerable:false,<br>    writable:true,<br>    value: 18<br>})<br>let arr &#x3D; Object.getOwnPropertyNames(obj)<br>console.log(arr)&#x2F;&#x2F;[“name”]</p>
+<p>Object.getOwnPropertySymbols(obj)<br>该方法返回一个指定对象自身所有的 Symbol 键名的属性的数组。</p>
+<p>let obj &#x3D; {}<br>Object.defineProperty(obj,”name”,{<br>    configurable:false,<br>    enumerable:false,<br>    writable:true,<br>    value:”test”<br>})<br>Object.defineProperty(obj,Symbol(),{<br>    configurable:false,<br>    enumerable:false,<br>    writable:true,<br>    value: 1<br>})<br>let arr &#x3D; Object.getOwnPropertySymbols(obj)<br>console.log(arr)&#x2F;&#x2F;[Symbol()]</p>
+<p>Object.getPrototypeOf(obj)<br>该方法返回指定对象的原型对象。</p>
+<p>function Person() {}<br>Person.prototype.hello &#x3D; function () {<br>    console.log(“hello”)<br>}<br>let person &#x3D; new Person()<br>let proto &#x3D; Object.getPrototypeOf(person)<br>proto.hello()&#x2F;&#x2F;hello</p>
+<p>Object.is(obj1,obj2)<br>该方法用于比较两个对象是否相同，返回布尔值。</p>
+<p>比较规则如下：</p>
+<p>如果两个值都是 undefined ，则返回 true<br>如果两个值都是 null，则返回 true<br>如果两个值都是 true 或 false ，则返回 true<br>如果两个值都是由相同个数的字符按照相同的顺序组成的字符串，则返回 true<br>如果两个值指向同一个对象，则返回 true<br>如果两个值都是 +0 ,-0，NaN，则返回 true<br>注意：该方法不会做隐式类型转换。</p>
+<p>Object.isExtensible(obj)<br>该方法用于判断一个对象是否可以扩展（是否可以添加属性），返回布尔值。</p>
+<p>在默认的情况下，对象是允许扩展的（无论是通过对象构造函数还是对象字面量方式创建的对象）。封闭对象，冻结对象是不可扩展的！！！</p>
+<p>let obj &#x3D; {}<br>Object.freeze(obj)<br>console.log(Object.isExtensible(obj))&#x2F;&#x2F;false</p>
+<p>如果要将一个对象设置为禁止扩展的对象，那么可以使用 Object.preventExtensions(obj)。</p>
+<p>Object.isFrozen(obj)<br>判断对象是否被冻结。返回布尔值。</p>
+<p>Object.seal(obj)<br>封闭对象，阻止添加新属性并将所有的属性标记为不可配置！</p>
+<p>三、实例方法<br>在 JS 中，所有的对象都是来自 Object，所有对象从 Object.prototype 中集成方法和属性，尽管它们可能被覆盖。Object 的原型对象中也定义着一些方法，但是有一部分已经遗弃了，下面展示几个还在使用的：</p>
+<p>Object.prototype.hasOwnProperty(prop) —— 检测指定对象的自身中是否具有指定的属性，返回布尔值。<br>Object.prototype.toString() —— 返回对象的字符串形式。<br>Object.prototype.valueOf() —— 返回对象本身。<br>Object.prototype.isPrototypeOf(obj) —— 检测对象是否在另一个对象的原型链上，返回布尔值。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.saladday.top">SaladDay</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.saladday.top/2020/11/05/JS_%E8%AF%A6%E8%A7%A3JS%E4%B8%AD%E7%9A%84Object/">http://www.saladday.top/2020/11/05/JS_%E8%AF%A6%E8%A7%A3JS%E4%B8%AD%E7%9A%84Object/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.saladday.top" target="_blank">SaladDay的Blog</a>！</span></div></div><div class="tag_share"><div class="post_share"><div class="social-share" data-image="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/11/08/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_%E4%BA%91%E5%BC%80%E5%8F%91%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E5%8A%9F%E8%83%BD/"><img class="prev-cover" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">云开发实现消息订阅功能</div></div></a></div><div class="next-post pull-right"><a href="/2020/05/25/Java_Java%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE%E8%A7%A3/"><img class="next-cover" src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java中对象的内存图解</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://saladday-figure-bed.oss-cn-chengdu.aliyuncs.com/img/mmexport1667394117445.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">SaladDay</div><div class="author-info__description">其实不会敲代码</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SaladDay"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:1203511142@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="sun-awt-X11GraphicsEnvironment"/></a><div class="content"><a class="title" href="/2022/12/28/%E8%B8%A9%E5%9D%91_sun-awt-X11GraphicsEnvironment/" title="sun-awt-X11GraphicsEnvironment">sun-awt-X11GraphicsEnvironment</a><time datetime="2022-12-28T04:37:33.000Z" title="发表于 2022-12-28 12:37:33">2022-12-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/14/Verilog_%E5%9F%BA%E4%BA%8EFSM%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96%E6%A8%A1%E5%9D%97/" title="基于FSM按键消抖模块"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于FSM按键消抖模块"/></a><div class="content"><a class="title" href="/2022/11/14/Verilog_%E5%9F%BA%E4%BA%8EFSM%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96%E6%A8%A1%E5%9D%97/" title="基于FSM按键消抖模块">基于FSM按键消抖模块</a><time datetime="2022-11-14T11:46:07.000Z" title="发表于 2022-11-14 19:46:07">2022-11-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/11/Verilog_ILA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="ILA的使用教程"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ILA的使用教程"/></a><div class="content"><a class="title" href="/2022/11/11/Verilog_ILA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="ILA的使用教程">ILA的使用教程</a><time datetime="2022-11-11T02:36:29.000Z" title="发表于 2022-11-11 10:36:29">2022-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/09/Verilog_%E5%88%A9%E7%94%A8%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%94%AE%E5%8D%96%E6%9C%BA/" title="利用有限状态机实现自动售卖机"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用有限状态机实现自动售卖机"/></a><div class="content"><a class="title" href="/2022/11/09/Verilog_%E5%88%A9%E7%94%A8%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%94%AE%E5%8D%96%E6%9C%BA/" title="利用有限状态机实现自动售卖机">利用有限状态机实现自动售卖机</a><time datetime="2022-11-09T03:27:48.000Z" title="发表于 2022-11-09 11:27:48">2022-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/07/Verilog_101%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84Verilog%E6%8F%8F%E8%BF%B0/" title="101序列检测器的Verilog描述（Moore&amp;Mealy）"><img src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="101序列检测器的Verilog描述（Moore&amp;Mealy）"/></a><div class="content"><a class="title" href="/2022/11/07/Verilog_101%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84Verilog%E6%8F%8F%E8%BF%B0/" title="101序列检测器的Verilog描述（Moore&amp;Mealy）">101序列检测器的Verilog描述（Moore&amp;Mealy）</a><time datetime="2022-11-07T00:52:41.000Z" title="发表于 2022-11-07 08:52:41">2022-11-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By SaladDay</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
